@@ -1,92 +1,165 @@
-DevOps Practice Project – Dist Directory
+# Trend DevOps Project
 
-This repository contains the production-ready build files (dist folder) for DevOps practice and deployment exercises.
+## Project Overview
 
-It is intentionally structured to help learners focus on CI/CD pipelines, hosting, containerization, and infrastructure setup rather than application development.
+This project demonstrates a complete DevOps implementation for the Trend application using AWS, Terraform, Docker, Jenkins, GitHub, and Kubernetes (EKS).
 
-📁 What This Repository Contains
+The objective was to automate infrastructure provisioning, containerization, CI/CD deployment, and monitoring of the application.
 
-dist/ – Compiled and production-ready static files
+---
 
-HTML
+## Architecture
 
-CSS
+GitHub Repository
+↓
+GitHub Webhook
+↓
+Jenkins Pipeline
+↓
+Docker Build
+↓
+DockerHub Push
+↓
+Amazon EKS Deployment
+↓
+Application Access via LoadBalancer
 
-JavaScript
+---
 
-Assets (images, fonts, etc.)
+## Technologies Used
 
-These files are ready to deploy to:
+* AWS EC2
+* Amazon EKS
+* Docker
+* DockerHub
+* Jenkins
+* GitHub
+* Terraform
+* Kubernetes
+* CloudWatch
 
-Web servers (Nginx / Apache)
+---
 
-Cloud platforms (AWS S3, Azure Blob, GCP Storage)
+## Repository
 
-Containerized environments (Docker + Nginx)
+GitHub:
+https://github.com/Radha96dev/Trend
 
-Kubernetes clusters
+DockerHub:
+https://hub.docker.com/repository/docker/radha96/trend-app
 
-CI/CD pipeline demonstrations
+---
 
-🎯 Purpose of This Repository
+## Infrastructure Provisioning
 
-This repository is designed for:
+Terraform was used to provision the required AWS infrastructure.
 
-DevOps beginners
+Commands:
 
-CI/CD practice
+terraform init
 
-Deployment pipeline testing
+terraform plan
 
-Docker & Kubernetes deployment exercises
+terraform apply
 
-Web server configuration practice
+---
 
-Reverse proxy and load balancer setup
+## Docker Containerization
 
-The goal is to simulate real-world deployment scenarios using already built application files.
+Build Docker Image:
 
-❓ Why is there NO package.json?
+docker build -t trend-app .
 
-You may notice that this repository does not include:
+Tag Image:
 
-package.json
+docker tag trend-app radha96/trend-app:latest
 
-node_modules
+Push Image:
 
-Source code (src/)
+docker push radha96/trend-app:latest
 
-Build tools configuration
+---
 
-✅ Reason:
+## Jenkins CI/CD Pipeline
 
-This repository only contains the final production build output (dist), not the development source code.
+Pipeline Stages:
 
-In a typical project:
+1. Clone Source Code
+2. Build Docker Image
+3. Push Image to DockerHub
+4. Deploy Application to EKS
+5. Verify Deployment
 
-Developers write source code.
+GitHub webhook was configured to automatically trigger Jenkins builds on code commits.
 
-The project is built using tools like:
+---
 
-Node.js
+## Kubernetes Deployment
 
-Webpack
+Deployment was performed on Amazon EKS using Kubernetes manifests.
 
-Vite
+Commands:
 
-React (or other frameworks)
+kubectl apply -f deployment.yaml
 
-A dist/ folder is generated.
+kubectl apply -f service.yaml
 
-Only the production build is deployed to servers.
+Verification:
 
-This repository represents step 4 only.
+kubectl get pods
 
-Since this is already the compiled output:
+kubectl get svc
 
-No dependencies are required
+---
 
-No build process is required
+## Monitoring
 
-No package.json is needed
-# webhook test
+Monitoring was performed using AWS CloudWatch and Kubernetes monitoring tools.
+
+Application logs and deployment status were continuously monitored.
+
+---
+
+## Screenshots
+
+Included:
+
+* GitHub Repository
+* DockerHub Repository
+* Terraform Apply Output
+* Jenkins Dashboard
+* Jenkins Successful Build
+* GitHub Webhook Delivery
+* EKS Cluster
+* Kubernetes Pods
+* Kubernetes Services
+* Application Running
+* Monitoring Dashboard
+
+---
+
+## Cleanup
+
+To avoid AWS charges, resources were removed after project completion.
+
+Examples:
+
+eksctl delete cluster --name <cluster-name> --region ap-south-1
+
+terraform destroy
+
+Delete Load Balancers
+
+Delete ECR Repositories
+
+Delete CodeBuild Projects
+
+Delete CodePipeline Resources
+
+Delete EC2 Instances
+
+---
+
+
+Radhamani R
+DevOps Project Submission
